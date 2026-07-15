@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="400" viewBox="0 0 1600 400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#14532d"/>
+      <stop offset="1" stop-color="#052e16"/>
+    </linearGradient>
+    <linearGradient id="tri" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#86efac"/>
+      <stop offset="1" stop-color="#4ade80"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="400" fill="#07100b"/>
+  <!-- mark -->
+  <rect x="60" y="60" width="280" height="280" rx="64" fill="url(#bg)"/>
+  <rect x="60" y="60" width="280" height="280" rx="64" fill="none" stroke="#4ade80" stroke-opacity="0.35" stroke-width="5"/>
+  <path d="M200 108 L272 248 L229 248 L200 199 L171 248 L128 248 Z" fill="url(#tri)"/>
+  <rect x="150" y="266" width="100" height="13" rx="6.5" fill="#4ade80" opacity="0.9"/>
+  <!-- wordmark -->
+  <text x="400" y="245" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="150" font-weight="800" letter-spacing="-4" fill="#eef5f0">Nex<tspan fill="#4ade80">Launch</tspan></text>
+</svg>
