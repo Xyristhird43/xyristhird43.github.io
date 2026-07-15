@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexLaunch Dashboard</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body class="app">
+
+<!-- ============ SIDEBAR ============ -->
+<aside class="sidebar">
+  <a href="index.html" class="logo"><span class="mark">▲</span><span>Nex<em>Launch</em></span></a>
+  <nav class="side-nav">
+    <button class="side-link active" data-view="overview"><span class="ic">📊</span><span class="txt">Overview</span></button>
+    <button class="side-link" data-view="xray"><span class="ic">🔬</span><span class="txt">Product X-Ray</span></button>
+    <button class="side-link" data-view="research"><span class="ic">🔎</span><span class="txt">Research</span></button>
+    <button class="side-link" data-view="tiktok"><span class="ic">📈</span><span class="txt">TikTok Trends</span></button>
+    <button class="side-link" data-view="listings"><span class="ic">🧠</span><span class="txt">AI Listings</span></button>
+    <button class="side-link" data-view="automations"><span class="ic">⚙️</span><span class="txt">Automations</span></button>
+    <button class="side-link" data-view="academy"><span class="ic">🎓</span><span class="txt">Academy</span><span class="soon">SOON</span></button>
+  </nav>
+  <div class="side-foot">Plan: <span class="plan-pill" id="side-plan">Free Trial</span><br><a href="index.html#pricing" style="color:var(--green)">Upgrade →</a></div>
+</aside>
+
+<!-- ============ MAIN ============ -->
+<div class="main">
+  <div class="topbar">
+    <h1 id="view-title">Overview</h1>
+    <div class="user"><span id="user-name">Guest Seller</span><span class="avatar" id="user-avatar">G</span></div>
+  </div>
+
+  <div class="content">
+
+    <!-- ======== OVERVIEW ======== -->
+    <section class="view active" id="view-overview">
+      <div class="grid-4">
+        <div class="kpi"><div class="k-label">Tracked Niches</div><div class="k-value">6</div><div class="k-delta up">▲ 2 this week</div></div>
+        <div class="kpi"><div class="k-label">Top Amazon Opportunity</div><div class="k-value green" id="ov-amz-top">—</div><div class="k-delta" id="ov-amz-top-name" style="color:var(--muted)">—</div></div>
+        <div class="kpi"><div class="k-label">Hottest TikTok Product</div><div class="k-value pink" id="ov-tt-top">—</div><div class="k-delta" id="ov-tt-top-name" style="color:var(--muted)">—</div></div>
+        <div class="kpi"><div class="k-label">X-Ray Scans Left</div><div class="k-value">∞</div><div class="k-delta" style="color:var(--muted)">Trial period</div></div>
+      </div>
+
+      <div class="grid-2" style="margin-top:20px">
+        <div class="panel">
+          <h2>🔥 Best Opportunities Right Now</h2>
+          <p class="p-sub">Highest revenue-to-competition ratio across both marketplaces.</p>
+          <div id="ov-opps"></div>
+        </div>
+        <div class="panel">
+          <h2>⚡ Quick Actions</h2>
+          <p class="p-sub">Jump straight into the tools.</p>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <button class="btn btn-primary" data-goto="xray">🔬 X-Ray a Product</button>
+            <button class="btn btn-ghost" data-goto="tiktok">📈 Browse TikTok Trends</button>
+            <button class="btn btn-ghost" data-goto="listings">🧠 Generate a Listing</button>
+            <button class="btn btn-ghost" data-goto="research">🔎 Open Research Table</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== X-RAY ======== -->
+    <section class="view" id="view-xray">
+      <div class="panel">
+        <h2>Product X-Ray</h2>
+        <p class="p-sub">Paste an ASIN, Amazon URL, or product name. Try <span class="mono" style="color:var(--green)">B0CX1EARBD</span> or "yoga mat".</p>
+        <div class="search-row">
+          <input id="xray-input" type="text" placeholder="B0CX1EARBD  ·  https://amazon.com/dp/…  ·  ice roller">
+          <button class="btn btn-primary" id="xray-btn">X-Ray →</button>
+        </div>
+      </div>
+
+      <div class="xray-result" id="xray-result">
+        <div class="panel">
+          <div class="xray-title">
+            <span class="thumb" id="xr-emoji">📦</span>
+            <div>
+              <h3 id="xr-name">—</h3>
+              <div class="meta"><span id="xr-asin">—</span> · <span id="xr-cat">—</span> · <span id="xr-src"></span></div>
+            </div>
+          </div>
+          <div class="grid-4">
+            <div class="kpi"><div class="k-label">Est. Revenue</div><div class="k-value green" id="xr-rev">—</div><div class="k-delta" style="color:var(--muted)">per month</div></div>
+            <div class="kpi"><div class="k-label">Est. Sales</div><div class="k-value" id="xr-sales">—</div><div class="k-delta" style="color:var(--muted)">units / month</div></div>
+            <div class="kpi"><div class="k-label">BSR</div><div class="k-value" id="xr-bsr">—</div><div class="k-delta" id="xr-trend">—</div></div>
+            <div class="kpi"><div class="k-label">Reviews</div><div class="k-value" id="xr-reviews">—</div><div class="k-delta" style="color:var(--muted)" id="xr-rating">—</div></div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top:20px">
+          <div class="panel">
+            <h2>Profit Breakdown <span style="font-size:12px;color:var(--muted);font-weight:400">(per unit)</span></h2>
+            <p class="p-sub">Amazon FBA fee model, est. landed cost.</p>
+            <table class="fee-table" id="xr-fees"></table>
+            <div id="xr-verdict"></div>
+          </div>
+          <div class="panel">
+            <h2>12-Month Sales Trend</h2>
+            <p class="p-sub">Modeled from rank velocity (demo).</p>
+            <div class="bar-chart" id="xr-chart"></div>
+            <div class="chart-caption"><span id="xr-chart-start"></span><span id="xr-chart-end"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== RESEARCH ======== -->
+    <section class="view" id="view-research">
+      <div class="panel">
+        <h2>Product Research</h2>
+        <p class="p-sub">Filter and sort the full opportunity database. Click column headers to sort.</p>
+        <div class="filter-row">
+          <select id="f-platform">
+            <option value="all">All Platforms</option>
+            <option value="amz">Amazon</option>
+            <option value="tt">TikTok Shop</option>
+          </select>
+          <select id="f-category"><option value="all">All Categories</option></select>
+          <input id="f-minrev" type="number" placeholder="Min revenue $/mo" min="0" step="1000" style="width:160px">
+          <input id="f-maxprice" type="number" placeholder="Max price $" min="0" style="width:130px">
+          <input id="f-search" type="text" placeholder="Search products…" style="flex:1;min-width:160px">
+        </div>
+        <div class="scroll-x">
+          <table class="market" id="research-table">
+            <thead>
+              <tr>
+                <th>Product</th><th>Platform</th>
+                <th class="sortable" data-sort="price">Price<span class="arrow"></span></th>
+                <th class="sortable" data-sort="revenue">Est. Revenue<span class="arrow">▼</span></th>
+                <th class="sortable" data-sort="sales">Est. Sales<span class="arrow"></span></th>
+                <th class="sortable" data-sort="margin">Margin<span class="arrow"></span></th>
+                <th class="sortable" data-sort="trend">Trend<span class="arrow"></span></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="table-foot" id="research-count"></div>
+      </div>
+    </section>
+
+    <!-- ======== TIKTOK ======== -->
+    <section class="view" id="view-tiktok">
+      <div class="panel" style="margin-bottom:20px">
+        <h2>TikTok Trend Radar</h2>
+        <p class="p-sub">Products gaining video velocity on TikTok Shop over the last 7 days. 🔥 Hot = accelerating creator adoption; act before saturation.</p>
+      </div>
+      <div class="tt-grid" id="tt-grid"></div>
+    </section>
+
+    <!-- ======== AI LISTINGS ======== -->
+    <section class="view" id="view-listings">
+      <div class="panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+          <div>
+            <h2>AI Listing Builder</h2>
+            <p class="p-sub" style="margin-bottom:0">Generate optimized copy for your target marketplace.</p>
+          </div>
+          <div class="mode-toggle">
+            <button class="active" id="mode-amz">Amazon</button>
+            <button id="mode-tt">TikTok Shop</button>
+          </div>
+        </div>
+        <div style="margin-top:20px">
+          <div class="grid-2">
+            <div class="field">
+              <label for="l-name">Product name</label>
+              <input id="l-name" type="text" placeholder="Insulated Water Bottle 32oz">
+            </div>
+            <div class="field">
+              <label for="l-keywords">Target keywords (comma-separated)</label>
+              <input id="l-keywords" type="text" placeholder="leakproof, gym, BPA free">
+            </div>
+          </div>
+          <div class="field">
+            <label for="l-features">Key features / selling points (one per line)</label>
+            <textarea id="l-features" rows="4" placeholder="Keeps drinks cold 24 hours&#10;Fits car cup holders&#10;Lifetime warranty"></textarea>
+          </div>
+          <button class="btn btn-primary" id="l-generate">✨ Generate Listing</button>
+          <span style="font-size:12.5px;color:var(--muted);margin-left:12px">Template engine (demo) — wire to Claude API for production copy.</span>
+        </div>
+        <div class="listing-out" id="listing-out"></div>
+      </div>
+    </section>
+
+    <!-- ======== AUTOMATIONS ======== -->
+    <section class="view" id="view-automations">
+      <div class="grid-2">
+        <div class="panel">
+          <h2>Create Automation</h2>
+          <p class="p-sub">When a condition hits, NexLaunch acts — no babysitting dashboards.</p>
+          <div class="field">
+            <label for="a-trigger">When…</label>
+            <select id="a-trigger">
+              <option value="tt-spike">TikTok product trend spikes above +% threshold</option>
+              <option value="bsr-improve">Tracked product's BSR improves past rank</option>
+              <option value="price-drop">Competitor drops price below $</option>
+              <option value="rev-cross">Niche est. revenue crosses $/mo</option>
+              <option value="new-comp">New competitor enters tracked niche</option>
+            </select>
+          </div>
+          <div class="quote-row">
+            <div class="field">
+              <label for="a-threshold">Threshold</label>
+              <input id="a-threshold" type="number" value="25" step="1">
+            </div>
+            <div class="field">
+              <label for="a-scope">Scope</label>
+              <select id="a-scope">
+                <option>All tracked products</option>
+                <option>Beauty niche</option>
+                <option>Home & Kitchen niche</option>
+                <option>Electronics niche</option>
+                <option>Pet Supplies niche</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="a-action">Then…</label>
+            <select id="a-action">
+              <option value="email">📧 Email me</option>
+              <option value="telegram">📲 Send Telegram alert</option>
+              <option value="listing">🧠 Auto-draft an AI listing</option>
+              <option value="watch">👁 Add to watchlist + daily digest</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-block" id="a-create">＋ Create Automation</button>
+          <p style="font-size:12px;color:var(--muted);margin-top:12px">Demo mode: rules are saved locally and triggers are simulated. Production runs these on a scheduler against live data feeds.</p>
+        </div>
+        <div class="panel">
+          <h2>Active Automations</h2>
+          <p class="p-sub" id="a-count">No automations yet.</p>
+          <div id="a-list"></div>
+        </div>
+      </div>
+      <div class="panel" style="margin-top:20px">
+        <h2>Recent Triggers <span class="live-tag" style="margin-left:10px"><span class="dot"></span>Simulated</span></h2>
+        <p class="p-sub">What your automations caught in the last 7 days.</p>
+        <div id="a-feed"></div>
+      </div>
+    </section>
+
+    <!-- ======== ACADEMY ======== -->
+    <section class="view" id="view-academy">
+      <div class="panel">
+        <h2>Seller Academy</h2>
+        <p class="p-sub">Courses are in production — here's the launch curriculum.</p>
+        <div class="course"><span class="ic">🏁</span><div><h3>Amazon FBA Zero to First Sale</h3><p>Account setup, product selection, sourcing, and your first shipment.</p></div><span class="len">4h 20m</span></div>
+        <div class="course"><span class="ic">📱</span><div><h3>TikTok Shop Launch Playbook</h3><p>Creator affiliates, sample strategy, and going viral on purpose.</p></div><span class="len">3h 45m</span></div>
+        <div class="course"><span class="ic">🧮</span><div><h3>Unit Economics that Don't Lie</h3><p>Fees, returns, ad spend — modeling true profitability before you buy inventory.</p></div><span class="len">2h 10m</span></div>
+        <div class="course"><span class="ic">🚀</span><div><h3>Scaling to Multi-Channel</h3><p>Running the same SKU on Amazon + TikTok without cannibalizing either.</p></div><span class="len">3h 05m</span></div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/receptionist.js"></script>
+</body>
+</html>
