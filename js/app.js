@@ -67,6 +67,7 @@ const ALL_ROWS = [...AMZ_PRODUCTS.map(amzRow), ...TT_PRODUCTS.map(ttRow)];
 })();
 
 /* ---------- X-Ray ---------- */
+let lastXray = null;
 function runXray() {
   const q = document.getElementById("xray-input").value.trim();
   if (!q) return;
@@ -123,10 +124,73 @@ function runXray() {
   document.getElementById("xr-chart-start").textContent = months[0];
   document.getElementById("xr-chart-end").textContent = months[11];
 
+  lastXray = { product: p, fees };
+  const rsOut = document.getElementById("rs-result");
+  rsOut.classList.remove("show");
+  rsOut.innerHTML = "";
+
   document.getElementById("xray-result").classList.add("show");
 }
 document.getElementById("xray-btn").addEventListener("click", runXray);
 document.getElementById("xray-input").addEventListener("keydown", e => { if (e.key === "Enter") runXray(); });
+
+/* ---------- reseller mode ---------- */
+const RS_COMMON_WORDS = new Set(("with for and the pro max mini plus set kit pack premium organic wireless electric " +
+  "insulated stainless steel mechanical gaming extended interactive ceremonial heatless cordless portable adjustable " +
+  "water bottle light stand case mat pad clock toy serum powder tumbler keyboard roller fountain projector scrubber " +
+  "trainer cooker earbuds alarm silk leather facial night star desk cat dog auto teeth whitening yoga alignment " +
+  "charging ring tripod grip strength counter galaxy spin sunrise rice steamer curl ribbon ice style handle lines purple " +
+  "matcha gua sha led rgb hot-swap wake-up amazon product").split(" "));
+
+document.getElementById("rs-toggle").addEventListener("change", e => {
+  document.getElementById("rs-fields").classList.toggle("show", e.target.checked);
+  if (!e.target.checked) {
+    const out = document.getElementById("rs-result");
+    out.classList.remove("show");
+    out.innerHTML = "";
+  }
+});
+
+document.getElementById("rs-calc").addEventListener("click", () => {
+  if (!lastXray) return;
+  const out = document.getElementById("rs-result");
+  const sourceCost = parseFloat(document.getElementById("rs-cost").value);
+  const prep = parseFloat(document.getElementById("rs-prep").value) || 0;
+  if (isNaN(sourceCost) || sourceCost < 0) {
+    out.innerHTML = `<div class="gating">Enter your source cost per unit to calculate.</div>`;
+    out.classList.add("show");
+    return;
+  }
+  const { product: p, fees } = lastXray;
+  const buyBox = p.price;
+  const payout = p.price - fees.total;
+  const net = payout - sourceCost - prep;
+  const cashIn = sourceCost + prep;
+  const roi = cashIn > 0 ? (net / cashIn) * 100 : 0;
+  const margin = (net / p.price) * 100;
+
+  let verdict;
+  if (roi >= 30 && net >= 3) verdict = `<span class="verdict good">✅ Solid resell — margin survives fees</span>`;
+  else if (roi >= 15) verdict = `<span class="verdict mid">⚠️ Thin — negotiate sourcing or skip</span>`;
+  else verdict = `<span class="verdict bad">❌ Pass — you'd be working for Amazon for free</span>`;
+
+  const brandTok = p.name.split(/\s+/).slice(1).find(w =>
+    /^[A-Z][A-Za-z-]{2,}$/.test(w) && !RS_COMMON_WORDS.has(w.toLowerCase()));
+  const gating = brandTok
+    ? `⚠️ <strong>Possible brand gating</strong> — "${brandTok}" looks like a brand name`
+    : `✔ <strong>Typically ungated category</strong>`;
+
+  out.innerHTML = `
+    <div class="grid-4">
+      <div class="kpi"><div class="k-label">Buy Box (est.)</div><div class="k-value">${fmtUSD(buyBox, 2)}</div><div class="k-delta" style="color:var(--muted)">demo data</div></div>
+      <div class="kpi"><div class="k-label">Payout After Fees</div><div class="k-value">${fmtUSD(payout, 2)}</div><div class="k-delta" style="color:var(--muted)">referral + FBA</div></div>
+      <div class="kpi"><div class="k-label">Net Profit / Unit</div><div class="k-value" style="color:${net > 0 ? "var(--green)" : "var(--red)"}">${fmtUSD(net, 2)}</div><div class="k-delta" style="color:var(--muted)">${margin.toFixed(0)}% margin</div></div>
+      <div class="kpi"><div class="k-label">ROI</div><div class="k-value">${roi.toFixed(0)}%</div><div class="k-delta" style="color:var(--muted)">on ${fmtUSD(cashIn, 2)} cash in</div></div>
+    </div>
+    <div style="margin-top:16px">${verdict}</div>
+    <div class="gating">Gating risk: ${gating} <span style="color:var(--muted)">(heuristic — confirm with the "Sell on Amazon" button in Seller Central)</span></div>`;
+  out.classList.add("show");
+});
 
 /* ---------- research table ---------- */
 let sortKey = "revenue", sortDir = -1;

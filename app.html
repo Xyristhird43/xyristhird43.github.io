@@ -104,6 +104,26 @@
             <div class="chart-caption"><span id="xr-chart-start"></span><span id="xr-chart-end"></span></div>
           </div>
         </div>
+
+        <div class="panel" style="margin-top:20px">
+          <h2>Reseller Mode</h2>
+          <p class="p-sub">Attaching to an existing listing instead of launching your own? Check if the margin survives.</p>
+          <label class="rs-toggle"><input type="checkbox" id="rs-toggle"><span>I'm reselling this product (attaching to the existing listing)</span></label>
+          <div class="rs-fields" id="rs-fields">
+            <div class="grid-2">
+              <div class="field">
+                <label for="rs-cost">Your source cost per unit ($)</label>
+                <input id="rs-cost" type="number" min="0" step="0.01" placeholder="12.50">
+              </div>
+              <div class="field">
+                <label for="rs-prep">Prep + inbound shipping per unit ($)</label>
+                <input id="rs-prep" type="number" min="0" step="0.01" value="1.50">
+              </div>
+            </div>
+            <button class="btn btn-primary" id="rs-calc">Calculate</button>
+          </div>
+          <div class="rs-result" id="rs-result"></div>
+        </div>
       </div>
     </section>
 

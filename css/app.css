@@ -93,6 +93,15 @@ body.app { display: flex; min-height: 100vh; background: var(--bg); }
 .verdict.mid { color: #fbbf24; background: rgba(251,191,36,.07); border: 1px solid rgba(251,191,36,.2); }
 .verdict.bad { color: var(--red); background: rgba(248,113,113,.07); border: 1px solid rgba(248,113,113,.2); }
 
+/* reseller mode */
+.rs-toggle { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.rs-toggle input { width: 16px; height: 16px; accent-color: var(--green); cursor: pointer; }
+.rs-fields { display: none; margin-top: 18px; }
+.rs-fields.show { display: block; animation: fadeIn .25s ease; }
+.rs-result { display: none; margin-top: 20px; }
+.rs-result.show { display: block; animation: fadeIn .3s ease; }
+.rs-result .gating { font-size: 13px; margin-top: 14px; line-height: 1.6; }
+
 /* research filters */
 .filter-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
 .filter-row select, .filter-row input {
